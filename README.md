@@ -36,6 +36,14 @@ sudo echo "/usr/local/lib" >> /etc/ld.so.conf
 sudo ldconfig 
 ```
 
+### install yara-python
+
+``` bash
+cd yara-python-4.1.0-debug/
+ln -s ../yara-4.1.0-debug/ yara
+pip install .
+```
+
 ## 補足
 
 - 元のリポジトリのREADMEは[README_origin.md](README_origin.md)です。
