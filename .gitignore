@@ -1,5 +1,6 @@
 yawaraka-yara-book/
-yara-python-4.1.0-debug/yara
+yara-python-4.1.0-debug/yara/
+
 # Generic auto-generated build files
 *~
 *.a
