@@ -523,6 +523,8 @@ YR_API int yr_scanner_scan_mem_blocks(
 
     if (message != 0 && !RULE_IS_PRIVATE(rule))
     {
+      // NOTE: Callback関数
+      printf(scanner->user_data);
       switch (scanner->callback(scanner, message, rule, scanner->user_data))
       {
       case CALLBACK_ABORT:

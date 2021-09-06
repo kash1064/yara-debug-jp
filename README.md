@@ -27,6 +27,7 @@ cd yara-4.1.0-debug
 ./configure
 make
 make install
+cd ../
 ```
 
 - Add config

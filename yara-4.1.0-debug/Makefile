@@ -542,7 +542,7 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/build-aux/ar-lib \
 	$(top_srcdir)/build-aux/test-driver AUTHORS COPYING \
 	build-aux/ar-lib build-aux/compile build-aux/config.guess \
 	build-aux/config.sub build-aux/depcomp build-aux/install-sh \
-	build-aux/ltmain.sh build-aux/missing
+	build-aux/ltmain.sh build-aux/missing build-aux/ylwrap
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
