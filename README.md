@@ -22,7 +22,7 @@ sudo apt-get install flex bison -y
 - Build and install
 
 ``` bash
-cd yara-4.1.0
+cd yara-4.1.0-debug
 ./bootstrap.sh
 ./configure
 make
