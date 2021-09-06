@@ -402,6 +402,9 @@ YR_API int yr_scanner_scan_mem_blocks(
     YR_SCANNER* scanner,
     YR_MEMORY_BLOCK_ITERATOR* iterator)
 {
+  // NOTE: すべてのルールのスキャン前に呼び出される
+  printf("Called yr_scanner_scan_mem_blocks().\n");
+
   YR_DEBUG_FPRINTF(2, stderr, "+ %s() {\n", __FUNCTION__);
 
   YR_RULES* rules;
@@ -433,6 +436,7 @@ YR_API int yr_scanner_scan_mem_blocks(
     // corresponding to the match). Each notebook's page can store up to 1024
     // matches.
     uint32_t max_match_data;
+    printf("uint32_t max_match_data is %d\n", max_match_data);
 
     FAIL_ON_ERROR(
         yr_get_configuration(YR_CONFIG_MAX_MATCH_DATA, &max_match_data));
@@ -507,6 +511,9 @@ YR_API int yr_scanner_scan_mem_blocks(
 
   for (i = 0, rule = rules->rules_table; !RULE_IS_NULL(rule); i++, rule++)
   {
+    // NOTE: ここがルールのスキャンごとに呼ばれる
+    printf("Start for loop %d rule\n", i);
+
     int message = 0;
 
     if (yr_bitmask_is_set(scanner->rule_matches_flags, i) &&
@@ -521,10 +528,14 @@ YR_API int yr_scanner_scan_mem_blocks(
         message = CALLBACK_MSG_RULE_NOT_MATCHING;
     }
 
+    // NOTE: message はルールにマッチしたかどうか Matchなら 1 Not Matchなら 2
+    printf("Message is %d\n", message);
+
     if (message != 0 && !RULE_IS_PRIVATE(rule))
     {
-      // NOTE: Callback関数
-      printf(scanner->user_data);
+      // NOTE: Callback関数の呼び出し
+      printf("Callback function calling\n");
+      
       switch (scanner->callback(scanner, message, rule, scanner->user_data))
       {
       case CALLBACK_ABORT:
@@ -538,6 +549,8 @@ YR_API int yr_scanner_scan_mem_blocks(
     }
   }
 
+  // NOTE: すべてのルールのスキャン終了後に呼ばれる
+  printf("Print when all scan ended if you call yara through yara-python.\n");
   scanner->callback(
       scanner, CALLBACK_MSG_SCAN_FINISHED, NULL, scanner->user_data);
 

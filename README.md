@@ -37,11 +37,15 @@ sudo echo "/usr/local/lib" >> /etc/ld.so.conf
 sudo ldconfig 
 ```
 
-### install yara-python
+## Build yara-python
 
 ``` bash
 cd yara-python-4.1.0-debug/
 ln -s ../yara-4.1.0-debug/ yara
+```
+
+``` bash
+python3 setup.py build
 pip install .
 ```
 
