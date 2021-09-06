@@ -21,8 +21,6 @@ yara-4.1.0-debug/*.dSYM
 yara-4.1.0-debug/.deps
 yara-4.1.0-debug/.libs
 INSTALL
-Makefile
-Makefile.in
 stamp-h1
 
 # Specific auto-generated build files

@@ -26,7 +26,7 @@ cd yara-4.1.0-debug
 ./bootstrap.sh
 ./configure
 make
-sudo make install
+make install
 ```
 
 - Add config

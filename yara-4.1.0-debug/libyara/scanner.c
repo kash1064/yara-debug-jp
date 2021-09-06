@@ -196,7 +196,6 @@ static void _yr_scanner_clean_matches(YR_SCANNER* scanner)
       sizeof(YR_MATCHES) * scanner->rules->num_strings);
 }
 
-// MEMO: yr_scanner_create YARAスキャン前に呼び出し？
 YR_API int yr_scanner_create(YR_RULES* rules, YR_SCANNER** scanner)
 {
   YR_DEBUG_FPRINTF(2, stderr, "- %s() {} \n", __FUNCTION__);
@@ -209,7 +208,6 @@ YR_API int yr_scanner_create(YR_RULES* rules, YR_SCANNER** scanner)
   if (new_scanner == NULL)
     return ERROR_INSUFFICIENT_MEMORY;
 
-  // MEMO: ハッシュテーブルの作成
   FAIL_ON_ERROR_WITH_CLEANUP(
       yr_hash_table_create(64, &new_scanner->objects_table),
       yr_free(new_scanner));
@@ -525,8 +523,6 @@ YR_API int yr_scanner_scan_mem_blocks(
 
     if (message != 0 && !RULE_IS_PRIVATE(rule))
     {
-      // NOTE: Callback関数の呼び出し
-      
       switch (scanner->callback(scanner, message, rule, scanner->user_data))
       {
       case CALLBACK_ABORT:
@@ -618,7 +614,6 @@ static const uint8_t* _yr_fetch_block_data(YR_MEMORY_BLOCK* block)
   return (const uint8_t*) block->context;
 }
 
-// NOTE: Scan
 YR_API int yr_scanner_scan_mem(
     YR_SCANNER* scanner,
     const uint8_t* buffer,

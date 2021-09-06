@@ -1268,7 +1268,6 @@ static void unload_modules_data()
   modules_data_list = NULL;
 }
 
-// MEMO: メインスレッド
 int main(int argc, const char** argv)
 {
   COMPILER_RESULTS cr;
@@ -1287,7 +1286,6 @@ int main(int argc, const char** argv)
   scan_opts.follow_symlinks = follow_symlinks;
   scan_opts.recursive_search = recursive_search;
 
-  printf("Called main func\n");
   if (show_version)
   {
     printf("%s\n", YR_VERSION);
@@ -1330,14 +1328,10 @@ int main(int argc, const char** argv)
     return EXIT_FAILURE;
   }
 
-  printf("Call load_modules_data()\n");
   if (!load_modules_data())
     exit_with_code(EXIT_FAILURE);
 
-  // MEMO: ライブラリの初期化
   result = yr_initialize();
-  printf("Result yr_initialize() %d\n", result);
-
 
   if (result != ERROR_SUCCESS)
   {
@@ -1345,14 +1339,12 @@ int main(int argc, const char** argv)
     exit_with_code(EXIT_FAILURE);
   }
 
-  // MEMO: stack_size と max_strings_per_rule の値を上書き
   yr_set_configuration(YR_CONFIG_STACK_SIZE, &stack_size);
   yr_set_configuration(YR_CONFIG_MAX_STRINGS_PER_RULE, &max_strings_per_rule);
 
-
   // Try to load the rules file as a binary file containing
   // compiled rules first
-  // MEMO: コンパイル済みのルールを先にチェックする
+
   if (rules_are_compiled)
   {
     // When a binary file containing compiled rules is provided, yara accepts
@@ -1377,7 +1369,6 @@ int main(int argc, const char** argv)
     // Rules file didn't contain compiled rules, let's handle it
     // as a text file containing rules in source form.
 
-    // MEMO: ルールのコンパイル
     if (yr_compiler_create(&compiler) != ERROR_SUCCESS)
       exit_with_code(EXIT_FAILURE);
 
@@ -1388,7 +1379,6 @@ int main(int argc, const char** argv)
       print_error(result);
       exit_with_code(EXIT_FAILURE);
     }
-
 
     if (atom_quality_table != NULL)
     {
@@ -1438,10 +1428,8 @@ int main(int argc, const char** argv)
   if (fast_scan)
     flags |= SCAN_FLAGS_FAST_MODE;
 
-  // MEMO: タイムアウト？
   scan_opts.deadline = time(NULL) + timeout;
 
-  // MEMO: 引数がディレクトリかどうかの判定
   arg_is_dir = is_directory(argv[argc - 1]);
 
   if (scan_list_search && arg_is_dir)
@@ -1465,7 +1453,6 @@ int main(int argc, const char** argv)
       thread_args[i].deadline = scan_opts.deadline;
       thread_args[i].current_count = 0;
 
-      // MEMO: YARAスキャンの開始
       result = yr_scanner_create(rules, &thread_args[i].scanner);
 
       if (result != ERROR_SUCCESS)
@@ -1513,7 +1500,6 @@ int main(int argc, const char** argv)
   {
     CALLBACK_ARGS user_data = {argv[argc - 1], 0};
 
-    // MEMO: YARAスキャンの開始
     result = yr_scanner_create(rules, &scanner);
 
     if (result != ERROR_SUCCESS)
