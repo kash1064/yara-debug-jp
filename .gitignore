@@ -1,25 +1,25 @@
 yawaraka-yara-book/
 
 # Generic auto-generated build files
-yara-4.1.0-debug/*~
-yara-4.1.0-debug/*.a
-yara-4.1.0-debug/*.gcda
-yara-4.1.0-debug/*.gcno
-yara-4.1.0-debug/*.gcov
-yara-4.1.0-debug/*.la
-yara-4.1.0-debug/*.lai
-yara-4.1.0-debug/*.lo
-yara-4.1.0-debug/*.Plo
-yara-4.1.0-debug/*.Po
-yara-4.1.0-debug/*.o
-yara-4.1.0-debug/*.so
-yara-4.1.0-debug/*.so.[0-9][0-9]*
-yara-4.1.0-debug/*.so.[0-9][0-9]*.[0-9][0-9]*.[0-9][0-9]*
-yara-4.1.0-debug/*.Tpo
-yara-4.1.0-debug/*.m4
-yara-4.1.0-debug/*.dSYM
-yara-4.1.0-debug/.deps
-yara-4.1.0-debug/.libs
+*~
+*.a
+*.gcda
+*.gcno
+*.gcov
+*.la
+*.lai
+*.lo
+*.Plo
+*.Po
+*.o
+*.so
+*.so.[0-9][0-9]*
+*.so.[0-9][0-9]*.[0-9][0-9]*.[0-9][0-9]*
+*.Tpo
+*.m4
+*.dSYM
+.deps
+.libs
 INSTALL
 stamp-h1
 
@@ -90,17 +90,17 @@ yara-4.1.0-debug/Release/
 yara-4.1.0-debug/Debug/
 yara-4.1.0-debug/windows/*/.vs
 yara-4.1.0-debug/x64/
-yara-4.1.0-debug/*.obj
-yara-4.1.0-debug/*.suo
-yara-4.1.0-debug/*.sdf
-yara-4.1.0-debug/*.opendb
-yara-4.1.0-debug/*.opensdf
-yara-4.1.0-debug/*.VC.db
+*.obj
+*.suo
+*.sdf
+*.opendb
+*.opensdf
+*.VC.db
 
 # NuGet
 yara-4.1.0-debug/windows/*/packages/
-yara-4.1.0-debug/*.trs
-yara-4.1.0-debug/*.log
+*.trs
+*.log
 yara-4.1.0-debug/.dirstamp
 
 yara-4.1.0-debug/.idea/
