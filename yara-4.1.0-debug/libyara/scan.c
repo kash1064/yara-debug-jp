@@ -615,6 +615,7 @@ static int _yr_scan_verify_chained_string_match(
   return ERROR_SUCCESS;
 }
 
+// NOTE: _yr_scan_match_callback
 static int _yr_scan_match_callback(
     const uint8_t* match_data,
     int32_t match_length,
@@ -624,6 +625,8 @@ static int _yr_scan_match_callback(
   CALLBACK_ARGS* callback_args = (CALLBACK_ARGS*) args;
 
   YR_STRING* string = callback_args->string;
+  // NOTE: 呼ばれるのはルールスキャンのループ前に一度だけ
+  // printf("callback_args->string : %s\n", string);
   YR_MATCH* new_match;
 
   int result = ERROR_SUCCESS;
@@ -996,6 +999,7 @@ int yr_scan_verify_match(
         (void*) string,
         context->user_data);
 
+    // NOTE: マッチ時のCallback関数呼び出し？
     if (result == CALLBACK_CONTINUE)
     {
       string->flags |= STRING_FLAGS_DISABLED;

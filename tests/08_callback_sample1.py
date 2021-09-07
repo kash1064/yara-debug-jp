@@ -9,7 +9,7 @@ def scan_callback(data):
     print(type(data))
     pprint.pprint(data)
     
-    return yara.CALLBACK_CONTINUE
+    return 10000
 
 # YARAルールのコンパイル
 rules = yara.compile(filepath=rule_file_path)

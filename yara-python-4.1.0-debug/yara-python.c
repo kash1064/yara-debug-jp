@@ -801,6 +801,8 @@ int yara_callback(
     return handle_too_many_matches(context, message_data, user_data);
 
   case CALLBACK_MSG_SCAN_FINISHED:
+    // NOTE: 呼び出されるタイミングはすべてのスキャンが終わった後
+    printf("CALLBACK_MSG_SCAN_FINISHED %d / CALLBACK_CONTINUE %d \n", CALLBACK_MSG_SCAN_FINISHED, CALLBACK_CONTINUE);
     return CALLBACK_CONTINUE;
 
   case CALLBACK_MSG_RULE_NOT_MATCHING:
@@ -932,10 +934,16 @@ int yara_callback(
     PyDict_SetItemString(callback_dict, "meta", meta_list);
     PyDict_SetItemString(callback_dict, "strings", string_list);
 
+    // NOTE: ここで PyObject_CallFunctionObjArgs(callback, callback_dict, NULL);
+    printf("Callbackfunc through PyObject_CallFunctionObjArgs()\n");
+    printf("callback_dict : %x\n", callback_dict);
     callback_result = PyObject_CallFunctionObjArgs(
         callback,
         callback_dict,
         NULL);
+
+    // NOTE: yara-pythonのCallback関数で設定した値をlong longオブジェクトとして出力
+    printf("callback_result : %d\n", PyLong_AsLongLong(callback_result));
 
     if (callback_result != NULL)
     {
